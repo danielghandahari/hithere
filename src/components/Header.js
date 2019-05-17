@@ -11,8 +11,8 @@ const Wrapper = styled.div`
 
 const H1 = styled.h1`
   font-size: 2.25rem;
-  margin-left: 1.5rem;
-  /* font-family: Muli; */
+  margin-left: 2rem;
+  font-weight: 900;
 `;
 
 const Header = () => {
