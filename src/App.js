@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import { Center } from "./utils/style-components";
 import CardView from "./components/Card";
 import { fetchWeather } from "./utils/http-manager";
+import { convertTimestampToTime } from "./utils/utils";
 
 const Global = createGlobalStyle`
   body {font-family: muli;}
@@ -27,7 +28,18 @@ function App() {
 
   useEffect(() => {
     async function setWeatherState() {
-      console.log("WEATHER", await fetchWeather());
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async position => {
+          const newWeather = await fetchWeather(
+            position.coords.latitude,
+            position.coords.longitude
+          );
+
+          console.log({ newWeather });
+
+          setWeather(newWeather);
+        });
+      }
     }
 
     setWeatherState();
@@ -39,7 +51,20 @@ function App() {
       <Header />
       <Center>
         <CardView>
-          <div>{weather ? weather.coords : "TODO"}</div>
+          <div>{weather ? weather.main.temp : "Loading..."}</div>
+          <div>{weather ? weather.name : "Loading..."}</div>
+          <div>{weather ? weather.weather[0].description : "Loading..."}</div>
+          <div>
+            {weather
+              ? convertTimestampToTime(weather.sys.sunrise)
+              : "Loading..."}
+          </div>
+          <div>
+            {weather
+              ? convertTimestampToTime(weather.sys.sunset)
+              : "Loading..."}
+          </div>
+          <div>{weather ? weather.wind.speed : "Loading..."}</div>
         </CardView>
         <CardView />
         <CardView />
