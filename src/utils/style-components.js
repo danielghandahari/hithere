@@ -8,7 +8,7 @@ export const Center = styled.div`
 `;
 
 export const H1 = styled.h1`
-  font-size: 2.25rem;
+  font-size: 3.25rem;
   font-weight: 900;
   margin-left: ${props => props.marginLeft};
 `;
