@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
 import * as muli from "typeface-muli";
 
 import Header from "./components/Header";
-import Clock from "./components/Clock";
 import { Center } from "./utils/style-components";
+import CardView from "./components/Card";
+import { fetchWeather } from "./utils/http-manager";
 
 const Global = createGlobalStyle`
   body {font-family: muli;}
@@ -22,12 +23,26 @@ const Wrapper = styled.div`
 `;
 
 function App() {
+  const [weather, setWeather] = useState(null);
+
+  useEffect(() => {
+    async function setWeatherState() {
+      console.log("WEATHER", await fetchWeather());
+    }
+
+    setWeatherState();
+  }, []);
+
   return (
     <Wrapper>
       <Global />
       <Header />
       <Center>
-        <Clock />
+        <CardView>
+          <div>{weather ? weather.coords : "TODO"}</div>
+        </CardView>
+        <CardView />
+        <CardView />
       </Center>
     </Wrapper>
   );

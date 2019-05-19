@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { startTime } from "../utils/utils";
 
 const Div = styled.div`
-  font-size: 10rem;
+  font-size: 3rem;
   font-weight: 700;
   transition: all 1s ease;
 `;
