@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBolt } from "@fortawesome/free-solid-svg-icons";
 
 const Div = styled.div`
   margin-right: 2rem;
@@ -31,6 +33,11 @@ const Div = styled.div`
   }
 `;
 
+const Bolt = styled.div`
+  visibility: ${props => (props.show ? "visible" : "hidden")};
+  margin-left: ${props => (props.show ? "15px" : "0")};
+`;
+
 const Battery = () => {
   const [battery, setBattery] = useState(null);
   const [batteryLevel, setBatteryLevel] = useState(null);
@@ -54,7 +61,11 @@ const Battery = () => {
   }, []);
 
   useEffect(() => {
-    if (battery) battery.onchargingtimechange = onChargingChange;
+    if (battery) {
+      battery.onchargingtimechange = onChargingChange;
+      battery.onchargingchange = onChargingChange;
+      battery.onlevelchange = onChargingChange;
+    }
   }, [battery]);
   return (
     <Div levelWidth={`${batteryLevel * 100}%`}>
@@ -64,7 +75,9 @@ const Battery = () => {
       <div className="battery-container">
         <div className="battery-cover" />
       </div>
-      <div className="bolt" />
+      <Bolt show={isCharging}>
+        <FontAwesomeIcon size={"3x"} icon={faBolt} />
+      </Bolt>
     </Div>
   );
 };
