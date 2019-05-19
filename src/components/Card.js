@@ -8,6 +8,7 @@ const Div = styled.div`
   border-radius: 30px;
   box-shadow: ${shadow};
   background-color: #fafafa;
+  padding: 25px;
 `;
 
 const CardView = ({ children }) => {

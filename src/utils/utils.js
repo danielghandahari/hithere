@@ -29,3 +29,9 @@ export function convertTimestampToTime(timestamp) {
     hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
   return formattedTime;
 }
+
+export function getPosition(options) {
+  return new Promise(function(resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject, options);
+  });
+}
