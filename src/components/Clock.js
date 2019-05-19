@@ -11,7 +11,7 @@ const Div = styled.div`
 const Clock = () => {
   const clockRef = useRef(null);
   useEffect(() => {
-    if (clockRef !== undefined) startTime(clockRef);
+    if (clockRef) startTime(clockRef);
   }, []);
   return <Div ref={clockRef} />;
 };

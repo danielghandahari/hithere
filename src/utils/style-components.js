@@ -6,3 +6,9 @@ export const Center = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const H1 = styled.h1`
+  font-size: 2.25rem;
+  font-weight: 900;
+  margin-left: ${props => props.marginLeft};
+`;

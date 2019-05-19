@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { H1 } from "../utils/style-components";
+import Battery from "./Battery";
 
 const Wrapper = styled.div`
   background-color: #fafafa;
@@ -9,16 +11,13 @@ const Wrapper = styled.div`
   border-bottom-left-radius: 30px;
 `;
 
-const H1 = styled.h1`
-  font-size: 2.25rem;
-  margin-left: 2rem;
-  font-weight: 900;
-`;
-
 const Header = () => {
+  const batteryApiExists = !!navigator.getBattery;
+
   return (
     <Wrapper>
-      <H1>Hi, there</H1>
+      <H1 marginLeft="2rem">Hi, there</H1>
+      {batteryApiExists ? <Battery /> : null}
     </Wrapper>
   );
 };

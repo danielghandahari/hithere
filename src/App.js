@@ -9,6 +9,10 @@ import { Center } from "./utils/style-components";
 
 const Global = createGlobalStyle`
   body {font-family: muli;}
+  ::selection {
+    background: grey;
+    color: #FAFAFA;
+  }
 `;
 
 const Wrapper = styled.div`

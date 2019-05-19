@@ -5,7 +5,6 @@ export function startTime(ref) {
   let s = today.getSeconds();
   m = checkTime(m);
   s = checkTime(s);
-  //   document.getElementById("txt").innerHTML = h + ":" + m + ":" + s;
   ref.current.innerHTML = h + ":" + m + ":" + s;
   let t = setTimeout(() => startTime(ref), 500);
 }
