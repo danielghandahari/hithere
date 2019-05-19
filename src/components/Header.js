@@ -4,9 +4,12 @@ import { H1 } from "../utils/style-components";
 import Battery from "./Battery";
 
 const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #fafafa;
   width: 100%;
-  height: 80px;
+  height: 120px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   border-bottom-left-radius: 30px;
 `;
