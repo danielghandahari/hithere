@@ -3,11 +3,13 @@ export function startTime(ref) {
   let h = today.getHours();
   let m = today.getMinutes();
   let s = today.getSeconds();
+  h = checkTime(h);
   m = checkTime(m);
   s = checkTime(s);
   ref.current.innerHTML = h + ":" + m + ":" + s;
   let t = setTimeout(() => startTime(ref), 500);
 }
+
 function checkTime(i) {
   if (i < 10) {
     i = "0" + i;
@@ -19,6 +21,7 @@ export function convertTimestampToTime(timestamp) {
   let date = new Date(timestamp * 1000);
   // Hours part from the timestamp
   let hours = date.getHours();
+  hours = checkTime(hours);
   // Minutes part from the timestamp
   let minutes = "0" + date.getMinutes();
   // Seconds part from the timestamp
@@ -34,4 +37,8 @@ export function getPosition(options) {
   return new Promise(function(resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject, options);
   });
+}
+
+export function jsUcfirst(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }

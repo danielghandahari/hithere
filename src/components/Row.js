@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fontColor } from "../utils/variables";
+import { thirdColor } from "../utils/variables";
 
 const Div = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 25px;
   .text {
-    margin-left: 10px;
-    margin-top: 15px;
+    margin-left: 20px;
     font-size: 24px;
     font-weight: 900;
   }
@@ -17,7 +17,7 @@ const Div = styled.div`
 const Row = ({ children, icon }) => {
   return (
     <Div>
-      <FontAwesomeIcon size={"2x"} icon={icon} color={fontColor} />
+      <FontAwesomeIcon size={"2x"} icon={icon} color={thirdColor} />
       <div className="text">{children}</div>
     </Div>
   );

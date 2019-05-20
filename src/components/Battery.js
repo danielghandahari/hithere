@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBolt } from "@fortawesome/free-solid-svg-icons";
 
 const Div = styled.div`
-  margin-right: 2rem;
+  margin-right: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +28,7 @@ const Div = styled.div`
       border-bottom-right-radius: ${props =>
         parseInt(props.levelWidth) > 85 ? "15px" : "0"};
       width: ${props => props.levelWidth};
-      background-color: green;
+      background-image: linear-gradient(#11998e, #38ef7d);
     }
   }
 `;
@@ -68,9 +68,9 @@ const Battery = () => {
     }
   }, [battery]);
   return (
-    <Div levelWidth={`${batteryLevel * 100}%`}>
+    <Div levelWidth={`${Math.round(batteryLevel * 100)}%`}>
       <div className="percentage-level">
-        {batteryLevel ? `${batteryLevel * 100}%` : "Loading..."}
+        {batteryLevel ? `${Math.round(batteryLevel * 100)}%` : "Loading..."}
       </div>
       <div className="battery-container">
         <div className="battery-cover" />

@@ -1,22 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import styled, { createGlobalStyle } from "styled-components";
 import * as muli from "typeface-muli";
 import {
   faWind,
   faArrowUp,
-  faArrowDown
+  faArrowDown,
+  faBullhorn
 } from "@fortawesome/free-solid-svg-icons";
 
 import Header from "./components/Header";
 import { Center } from "./utils/style-components";
 import CardView from "./components/Card";
-import { fetchWeather } from "./utils/http-manager";
-import { convertTimestampToTime, getPosition } from "./utils/utils";
+import { fetchWeather, randomQuote } from "./utils/http-manager";
+import { convertTimestampToTime, getPosition, jsUcfirst } from "./utils/utils";
 import Row from "./components/Row";
+import {
+  fontColor,
+  firstColor,
+  secondColor,
+  thirdColor
+} from "./utils/variables";
 
 const Global = createGlobalStyle`
-  body {font-family: muli;}
+  body {
+    font-family: muli;
+    color: ${fontColor};
+  }
   ::selection {
     background: grey;
     color: #FAFAFA;
@@ -24,7 +34,7 @@ const Global = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
-  background-image: radial-gradient(#ffefba, #ffffff);
+  background-image: radial-gradient(${firstColor}, ${secondColor});
   width: 100%;
   min-height: 100vh;
 
@@ -34,18 +44,36 @@ const Wrapper = styled.div`
     margin-bottom: 20px;
   }
 
-  .weather-desc {
+  .quote-text {
     font-size: 20px;
     font-weight: 900;
-    margin-top: 15px;
+  }
+
+  .quote-text p::before {
+    content: "“ ";
+    font-size: 20px;
+    color: ${thirdColor};
+  }
+
+  .quote-text p::after {
+    content: " ”";
+    font-size: 20px;
+    color: ${thirdColor};
+  }
+
+  .quote-author {
+    font-size: 20px;
+    font-weight: 600;
   }
 `;
 
 function App() {
+  const quoteRef = useRef(null);
+  const quoteAuthorRef = useRef(null);
   const [weather, setWeather] = useState(null);
 
   useEffect(() => {
-    async function setWeatherState() {
+    async function setWeatherStates() {
       if (navigator.geolocation) {
         const {
           coords: { latitude, longitude }
@@ -55,7 +83,15 @@ function App() {
       }
     }
 
-    setWeatherState();
+    async function setQuoteState() {
+      const data = await randomQuote();
+      const { content, title } = data[0];
+      quoteRef.current.innerHTML = content;
+      quoteAuthorRef.current.innerHTML = `— ${title}`;
+    }
+
+    setQuoteState();
+    setWeatherStates();
   }, []);
 
   return (
@@ -76,15 +112,18 @@ function App() {
               <Row icon={faArrowDown}>
                 {convertTimestampToTime(weather.sys.sunset)}
               </Row>
-              <div className="weather-desc">
-                {`${weather.weather[0].description}.`}
-              </div>
+              <Row icon={faBullhorn}>
+                {jsUcfirst(weather.weather[0].description)}
+              </Row>
             </>
           ) : (
             "Loading..."
           )}
         </CardView>
-        <CardView />
+        <CardView>
+          <div className="quote-text" ref={quoteRef} />
+          <div className="quote-author" ref={quoteAuthorRef} />
+        </CardView>
         <CardView />
       </Center>
     </Wrapper>
