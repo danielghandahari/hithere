@@ -45,19 +45,20 @@ const Wrapper = styled.div`
   }
 
   .quote-text {
-    font-size: 20px;
+    margin-top: -20px;
+    font-size: 25px;
     font-weight: 900;
   }
 
   .quote-text p::before {
     content: "“ ";
-    font-size: 20px;
+    font-size: 25px;
     color: ${thirdColor};
   }
 
   .quote-text p::after {
     content: " ”";
-    font-size: 20px;
+    font-size: 25px;
     color: ${thirdColor};
   }
 
