@@ -19,8 +19,10 @@ import {
   fontColor,
   firstColor,
   secondColor,
-  thirdColor
+  thirdColor,
+  shadow
 } from "./utils/variables";
+import Calendar from "react-calendar";
 
 const Global = createGlobalStyle`
   body {
@@ -65,6 +67,21 @@ const Wrapper = styled.div`
   .quote-author {
     font-size: 20px;
     font-weight: 600;
+  }
+
+  .calendar {
+    width: 250px;
+    height: 300px;
+    border-radius: 30px;
+    padding: 30px;
+    box-sizing: content-box;
+
+    box-shadow: ${shadow};
+    background-color: ${secondColor};
+  }
+
+  .react-calendar__navigation__label {
+    color: yellow;
   }
 `;
 
@@ -125,7 +142,8 @@ function App() {
           <div className="quote-text" ref={quoteRef} />
           <div className="quote-author" ref={quoteAuthorRef} />
         </CardView>
-        <CardView />
+        {/* <CardView /> */}
+        <Calendar value={new Date()} className="calendar" />
       </Center>
     </Wrapper>
   );
