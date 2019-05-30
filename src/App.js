@@ -73,6 +73,7 @@ const Wrapper = styled.div`
     width: 250px;
     height: 300px;
     border-radius: 30px;
+    border: none;
     padding: 30px;
     box-sizing: content-box;
 
@@ -81,7 +82,47 @@ const Wrapper = styled.div`
   }
 
   .react-calendar__navigation__label {
-    color: yellow;
+    color: ${fontColor};
+    font-size: 26px;
+    font-weight: 900;
+  }
+
+  .react-calendar__navigation__arrow {
+    display: none;
+  }
+
+  .react-calendar__month-view__weekdays__weekday abbr {
+    text-decoration: none;
+    color: grey;
+  }
+
+  .react-calendar__tile {
+    color: ${fontColor};
+    font-size: 14px;
+    font-weight: bold;
+    border
+  }
+
+  .react-calendar__tile:hover {
+    color: #fafafa;
+    background: grey !important;
+    border-radius: 0.5rem;
+  }
+
+  .react-calendar__tile--active {
+    color: #fafafa;
+    background: ${thirdColor} !important;
+    border-radius: 0.5rem;
+  }
+
+  .react-calendar__tile--active:hover {
+    background: ${thirdColor} !important;
+  }
+
+  .react-calendar__tile--hasActive {
+    color: #fafafa;
+    background: ${thirdColor} !important;
+    border-radius: 0.5rem;
   }
 `;
 
@@ -143,7 +184,11 @@ function App() {
           <div className="quote-author" ref={quoteAuthorRef} />
         </CardView>
         {/* <CardView /> */}
-        <Calendar value={new Date()} className="calendar" />
+        <Calendar
+          showNeighboringMonth={false}
+          value={new Date()}
+          className="calendar"
+        />
       </Center>
     </Wrapper>
   );
