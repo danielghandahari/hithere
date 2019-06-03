@@ -11,9 +11,19 @@ export async function fetchWeather(lat, lon) {
 }
 
 export async function randomQuote() {
-  return (await axios({
-    method: "GET",
-    url:
-      "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback="
-  })).data;
+  let quote = "";
+  let validQuoteFound = false;
+
+  for (; !validQuoteFound; ) {
+    quote = (await axios({
+      method: "GET",
+      url:
+        "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback="
+    })).data;
+
+    validQuoteFound = quote && quote[0].content.length < 130;
+  }
+  // console.log({ quote: quote[0].content.length });
+
+  return quote;
 }

@@ -30,7 +30,7 @@ const Global = createGlobalStyle`
     color: ${fontColor};
   }
   ::selection {
-    background: grey;
+    background: #FF8008;
     color: #FAFAFA;
   }
 `;
@@ -144,13 +144,29 @@ function App() {
 
     async function setQuoteState() {
       const data = await randomQuote();
-      const { content, title } = data[0];
-      quoteRef.current.innerHTML = content;
-      quoteAuthorRef.current.innerHTML = `— ${title}`;
+      if (data) {
+        const { content, title } = data[0];
+        quoteRef.current.innerHTML = content;
+        quoteAuthorRef.current.innerHTML = `— ${title}`;
+      }
     }
 
     setQuoteState();
     setWeatherStates();
+
+    // Toggle favicon if tab visible
+    window.addEventListener("visibilitychange", () => {
+      let link =
+        document.querySelector("link[rel*='icon']") ||
+        document.createElement("link");
+
+      if (document.hidden) {
+        link.href = "offline_favicon.ico";
+      } else {
+        link.href = "favicon.ico";
+      }
+      document.getElementsByTagName("head")[0].appendChild(link);
+    });
   }, []);
 
   return (

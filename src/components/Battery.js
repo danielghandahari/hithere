@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBolt } from "@fortawesome/free-solid-svg-icons";
 
 const Div = styled.div`
-  transform: scale(0.8);
   margin-right: 2.5rem;
   display: flex;
   align-items: center;
@@ -35,12 +34,16 @@ const Div = styled.div`
 
   @media screen and (max-width: 768px) {
     margin-right: 0;
+    transform: scale(0.8);
   }
 `;
 
 const Bolt = styled.div`
   visibility: ${props => (props.show ? "visible" : "hidden")};
   margin-left: ${props => (props.show ? "15px" : "0")};
+  @media screen and (max-width: 768px) {
+    transform: scale(0.8);
+  }
 `;
 
 const Battery = () => {
