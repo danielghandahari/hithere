@@ -6,6 +6,9 @@ const Div = styled.div`
   font-size: 3rem;
   font-weight: 700;
   transition: all 1s ease;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Clock = () => {

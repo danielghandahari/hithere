@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBolt } from "@fortawesome/free-solid-svg-icons";
 
 const Div = styled.div`
+  transform: scale(0.8);
   margin-right: 2.5rem;
   display: flex;
   align-items: center;
@@ -30,6 +31,10 @@ const Div = styled.div`
       width: ${props => props.levelWidth};
       background-image: linear-gradient(#11998e, #38ef7d);
     }
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-right: 0;
   }
 `;
 
