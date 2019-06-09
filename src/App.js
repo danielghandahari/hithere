@@ -25,7 +25,8 @@ import {
 import Calendar from "react-calendar";
 
 const Global = createGlobalStyle`
-  body {
+  html, body {
+    background-color: ${secondColor};
     font-family: muli;
     color: ${fontColor};
   }
