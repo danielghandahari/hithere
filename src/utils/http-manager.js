@@ -18,7 +18,10 @@ export async function randomQuote() {
     quote = (await axios({
       method: "GET",
       url:
-        "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback="
+        "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=",
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      }
     })).data;
 
     validQuoteFound = quote && quote[0].content.length < 130;
