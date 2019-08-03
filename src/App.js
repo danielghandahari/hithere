@@ -8,6 +8,7 @@ import {
   faArrowDown,
   faBullhorn
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 import Header from "./components/Header";
 import { Center } from "./utils/style-components";
@@ -123,7 +124,8 @@ const Wrapper = styled.div`
   .react-calendar__tile--hasActive {
     color: #fafafa;
     background: ${thirdColor} !important;
-    border-radius: 0.5rem;
+    border-radius: 0.5rem;import { axios } from 'axios';
+
   }
 `;
 
@@ -138,13 +140,18 @@ function App() {
         const {
           coords: { latitude, longitude }
         } = await getPosition();
+
         const newWeather = await fetchWeather(latitude, longitude);
+        const res = await axios.get(
+          `/.netlify/functions/fetchWeather?latitude=${latitude}&longitude=${longitude}`
+        );
+
         setWeather(newWeather);
       }
     }
 
     async function setQuoteState() {
-      const data = await randomQuote();
+      const { data } = await axios.get("/.netlify/functions/randomQuote");
       if (data) {
         const { content, title } = data[0];
         quoteRef.current.innerHTML = content;
