@@ -6,7 +6,7 @@ import {
   faWind,
   faArrowUp,
   faArrowDown,
-  faBullhorn
+  faBullhorn,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
@@ -21,7 +21,7 @@ import {
   firstColor,
   secondColor,
   thirdColor,
-  shadow
+  shadow,
 } from "./utils/variables";
 import Calendar from "react-calendar";
 
@@ -138,7 +138,7 @@ function App() {
     async function setWeatherStates() {
       if (navigator.geolocation) {
         const {
-          coords: { latitude, longitude }
+          coords: { latitude, longitude },
         } = await getPosition();
 
         const newWeather = await fetchWeather(latitude, longitude);
@@ -182,31 +182,27 @@ function App() {
       <Global />
       <Header />
       <Center>
-        <CardView>
-          {weather ? (
-            <>
-              <div className="weather-title">{`${weather.name}, ${Math.round(
-                weather.main.temp
-              )}°C`}</div>
-              <Row icon={faWind}>{`${weather.wind.speed}m/s`}</Row>
-              <Row icon={faArrowUp}>
-                {convertTimestampToTime(weather.sys.sunrise)}
-              </Row>
-              <Row icon={faArrowDown}>
-                {convertTimestampToTime(weather.sys.sunset)}
-              </Row>
-              <Row icon={faBullhorn}>
-                {jsUcfirst(weather.weather[0].description)}
-              </Row>
-            </>
-          ) : (
-            "Loading..."
-          )}
-        </CardView>
-        <CardView>
+        {weather && (
+          <CardView>
+            <div className="weather-title">{`${weather.name}, ${Math.round(
+              weather.main.temp
+            )}°C`}</div>
+            <Row icon={faWind}>{`${weather.wind.speed}m/s`}</Row>
+            <Row icon={faArrowUp}>
+              {convertTimestampToTime(weather.sys.sunrise)}
+            </Row>
+            <Row icon={faArrowDown}>
+              {convertTimestampToTime(weather.sys.sunset)}
+            </Row>
+            <Row icon={faBullhorn}>
+              {jsUcfirst(weather.weather[0].description)}
+            </Row>
+          </CardView>
+        )}
+        {/* <CardView>
           <div className="quote-text" ref={quoteRef} />
           <div className="quote-author" ref={quoteAuthorRef} />
-        </CardView>
+        </CardView> */}
         {/* <CardView /> */}
         <Calendar
           showNeighboringMonth={false}
